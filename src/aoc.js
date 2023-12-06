@@ -1,3 +1,6 @@
+const fs = require("fs");
+const readline = require("readline");
+
 // create a class for aoc
 class Aoc {
   constructor() {
@@ -20,10 +23,22 @@ class Aoc {
       j--;
     }
 
-    console.log(firstDigit, secondDigit);
+    return parseInt(firstDigit + secondDigit);
   }
 }
 
 // create a new instance of the class
 const aoc = new Aoc();
 aoc.getCalibrationValue("mdmvbhqjt5rkfpcnfvzhkkfbjvh8three9");
+
+let lineReader = readline.createInterface({
+  input: fs.createReadStream("inputs/day1.txt"),
+});
+
+let total = 0;
+lineReader.on("line", function (line) {
+  total += aoc.getCalibrationValue(line);
+});
+lineReader.on("close", function () {
+  console.log(total);
+});
