@@ -19,7 +19,10 @@ let lineReader = readline.createInterface({
 lineReader.on("line", function (line) {
   day.input = line;
   // process.stdout.write(++index + ": ");
+  console.log(`Game ${++index}: `);
+
   day.isValidGame();
+  console.log();
 });
 lineReader.on("close", function () {
   // console.log(total);

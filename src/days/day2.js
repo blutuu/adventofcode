@@ -1,17 +1,43 @@
 class Day2 {
   constructor() {
     this.input = null;
-    const colors = ["red", "green", "blue"];
+    this.colors = {
+      red: 12,
+      green: 13,
+      blue: 14,
+    };
   }
 
   isValidGame() {
-    let regex = /(red|green|blue)/g;
-    let input = this.input;
-    let match;
+    let regex = /\b\d{2}\b/g;
+    let input = this.input.substring(this.input.indexOf(":"));
+    let match, index, value;
 
     while ((match = regex.exec(input)) !== null) {
-      console.log(`Found ${match[0]} at ${match.index}`);
+      value = parseInt(match[0]);
+      index = match.index;
+      console.log(`Found ${value} at ${index}`);
+
+      if (this.isOver14(value)) {
+        console.log("Fail");
+        return false;
+      }
+
+      this.checkColorAndCompare(input.substring(index));
     }
+
+    return true;
+  }
+
+  checkColorAndCompare(input) {
+    let regex = /(red|green|blue)/g;
+    let match = regex.exec(input);
+
+    console.log(this.colors[match[0]]);
+  }
+
+  isOver14(input) {
+    if (input > 14) return true;
   }
 
   getID() {
